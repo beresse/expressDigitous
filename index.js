@@ -5,6 +5,7 @@ const port = 8000;
 app.listen(port, () => {
     console.log('Server started on port: ' + port);
 });
+
 // var elements = ["water", "fire", "earth", "wind"];  
 // console.log(elements[0])
 // var test = ["Hello", "there", "!"];
@@ -61,8 +62,8 @@ app.get("/authors/:id", (request, response) => {
 
 // livreid 
 
-app.get("/authors/:books/books", (request, response) => {
-    response.send(`${books[request.params.books - 1]}`)
+app.get("/authors/:book/books", (request, response) => {
+    response.send(`${books[request.params.book - 1]}`)
 })
 
 app.get("/cars/", (request, response) => {
@@ -70,18 +71,30 @@ app.get("/cars/", (request, response) => {
 })
 
 // JSONNNNNNNNNNNNNNNN :'()
-
+app.use(express.json())
 app.get("/json/authors/:id", (request, response) => {
-    response.send(`${JSON.stringify([request.params.id - 1])}`)
+    response.json(konexio[request.params.id])
 })
+
+let konexio = [{
+    author: "Lawrence Nowell",
+    nationality: "UK",
+    book: "Beowulf"
+}, {
+    author: "William Shakespeare",
+    nationality: "UK",
+    book: "Hamlet, Othello, Romeo and Juliet, MacBeth"
+}, {
+    author: "Charles Dickens",
+    nationality: "US",
+    book: "Oliver Twist, A Christmas Carol"
+}, {
+    author: "Oscar Wilde",
+    nationality: "UK",
+    book: "The Picture of Dorian Gray, The Importance of Being Earnest",
+}]
+
 // j'abandonne 
-let JSON = [
-    {   
-        name: "Lawrence Nowell",
-        nationality: "UK",
-        books: ["Beowulf"]
-    }
-]
 // The author with the ID 12133 does not exist
 
 // app.get("/author/:id", (request, response) => {
